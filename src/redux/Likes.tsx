@@ -26,7 +26,7 @@ const likesSlice = createSlice({
       state.hotel.push(action.payload);
     },
     setDelite(state, action: PayloadAction<number>) {
-      state.hotel.filter((a, i) => a.hotelId !== action.payload);
+       state.hotel = state.hotel.filter((a, i) => a.hotelId !== action.payload);
     },
   },
 });

@@ -52,7 +52,7 @@ reducers:{
 extraReducers: (builder) => {
     builder.addCase(fetchHotels.fulfilled, (state, action) => {
       state.hotel = action.payload
-      console.log(action.payload)
+      
       
     })
   },

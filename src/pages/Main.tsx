@@ -6,6 +6,7 @@ import { RootState, useAppDispatch } from '../redux/store';
 import { useSelector } from 'react-redux';
 import Search from '../components/search/Search';
 import { setDelite } from '../redux/Likes';
+import Favorit from '../components/Favorit';
 
 const  Main:React.FC = () => {
 
@@ -34,7 +35,7 @@ const  Main:React.FC = () => {
             <div>
               {like ? (
                 like.map((hotel) => (
-                  <Cart
+                  <Favorit
                     key={hotel.hotelId}
                     {...hotel}
                     

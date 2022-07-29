@@ -6,6 +6,8 @@ import classes from '../../pages/Main.module.scss';
 import { fetchHotels, setDaysValue, setLocalValue } from '../../redux/Hotels';
 import { RootState, useAppDispatch } from '../../redux/store';
 import debounce from 'lodash.debounce';
+import Calendar from './Calendar';
+
 const Search:React.FC = () =>{
   const local = useSelector((state: RootState) => state.hotels.location);
   const days = useSelector((state: RootState) => state.hotels.days);
@@ -31,7 +33,7 @@ const Search:React.FC = () =>{
         value={local}
         onChange={localHundler}
       />
-      <select name="" id=""></select>
+      <Calendar/>
       <MyInput children={'Количество дней'} value={days} onChange={daysHundler} />
 
       <MyButton />
