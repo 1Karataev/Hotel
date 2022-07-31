@@ -2,7 +2,6 @@
   "name": "hotels",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://1karataev.github.io/Hotel",
   "dependencies": {
     "@date-io/date-fns": "^2.14.0",
     "@mui/icons-material": "^5.8.4",
