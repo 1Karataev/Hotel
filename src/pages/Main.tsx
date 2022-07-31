@@ -26,7 +26,7 @@ const  Main:React.FC =  () => {
   const navigate = useNavigate();
   const logOut =()=>{
     dispatch(setAuth({ login: '', password: '' }));
-    return navigate('/Hotel')
+    return navigate('/')
   } 
  useEffect(() => {
    dispatch(setOutValue());

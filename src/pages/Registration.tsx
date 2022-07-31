@@ -38,7 +38,7 @@ const Registration:React.FC = () => {
       setValidPass(true)
       dispatch(setValid(true))
       dispatch(setAuth(data));
-      return navigate('/Hotel/main');
+      return navigate('/main');
     }
   };
   return (
