@@ -1,7 +1,14 @@
 import {  createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Hotel } from './Hotels';
 
-
+export interface hotelLike {
+  hotelId: number;
+  hotelName: string;
+  priceFrom: number;
+  stars: string;
+  date: string;
+  days: string;
+}
 
 
 interface LikesHotel {
@@ -14,7 +21,7 @@ const initialState: LikesHotel = {
   location: '',
   date: '',
   days: '',
-  hotel: [],
+  hotel: JSON.parse(localStorage.getItem('hotels') ?? '[]'),
 };
 
 
@@ -22,11 +29,14 @@ const likesSlice = createSlice({
   name: 'hotels',
   initialState,
   reducers: {
-    setItem(state, action: PayloadAction<Hotel>) {
+    setItem(state, action: PayloadAction<hotelLike>) {
       state.hotel.push(action.payload);
+      localStorage.setItem('hotels', JSON.stringify(state.hotel))
     },
+    
     setDelite(state, action: PayloadAction<number>) {
        state.hotel = state.hotel.filter((a, i) => a.hotelId !== action.payload);
+       localStorage.setItem('hotels', JSON.stringify(state.hotel));
     },
   },
 });

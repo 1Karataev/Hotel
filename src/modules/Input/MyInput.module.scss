@@ -3,17 +3,25 @@
   flex-direction: column;
   width: 100%;
   align-items:center;
+
+  
   input{
     background: #FFFFFF;
     border: 1px solid #C9CACC;
     border-radius: 4px;
     width: 90%;
     height: 50px;
+    padding: 16px;
+    margin-top: 7px;
     &:focus{
       outline: 0;
       border: 1px solid #C9CACC !important;
       
     }
+    &::placeholder{
+      color:#EB1717;
+    }
+   
   }
    
   label{
@@ -25,6 +33,12 @@
     font-size: 16px;
     line-height: 19px;
     color: #424242;
-
+    margin-top: 25px;
   }
+   
 }
+ .novalid{
+    color: #EB1717!important;
+  }
+
+ 

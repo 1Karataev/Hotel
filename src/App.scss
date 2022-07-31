@@ -2,8 +2,38 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  ::-webkit-scrollbar {
+    width: 2px;
 }
 
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 2px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #41522E;
+    border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    width: 2px;
+}
+}
+
+button {
+  &.Mui-selected{
+    background-color: #41522E!important;
+    border-radius: 4px;
+  }
+}
+
+body{
+  overflow: overlay;
+}
 .App {
   display: flex;
   justify-content: center;

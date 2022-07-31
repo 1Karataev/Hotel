@@ -1,17 +1,21 @@
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
+import {  Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Main from './pages/Main';
 import Registration from './pages/Registration';
+import { RootState } from './redux/store';
 
 function App() {
+  const user = useSelector((store:RootState)=>store.auth.valid)
+
+
   return (
     <div className="App">
       <Routes>
-        <Route path="/reg" element={<Registration />} />
+        <Route path="/" element={ <Registration />} />
 
-        <Route path="/" element={<Main />} />
+        <Route path="/main" element={<Main />} />
       </Routes>
     </div>
   );

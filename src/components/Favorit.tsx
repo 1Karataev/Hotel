@@ -1,43 +1,51 @@
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { Avatar, Checkbox, Rating } from '@mui/material';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Hotel } from '../redux/Hotels';
 import { setDelite, setItem } from '../redux/Likes';
-import { useAppDispatch } from '../redux/store';
+import { RootState, useAppDispatch } from '../redux/store';
 import classes from './Cart.module.scss';
 
-const Favorit: React.FC<Hotel> = ({ ...data }) => {
+type Cart = {
+  data:Hotel, 
+  days:string,
+  date:string;
+}
+const Favorit: React.FC<Cart> = (data) => {
   const [value, setValue] = React.useState<number | null>(2);
   const [cheked, setCheked] = useState<boolean>(true);
   const dispatch = useAppDispatch();
 
   const hundlerClick = () => {
-    dispatch(setDelite(data.hotelId));
+    dispatch(setDelite(data.data.hotelId));
     setCheked(!cheked);
   };
   return (
-    <div className={classes.cart}>
-      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-      <div className={classes.content}>
-        <h2>{data.hotelName}</h2>
-        <p>7 июля 2020 -- 1 день</p>
+    <div className={classes.content__cart} >
+      <div className={classes.content} style={{ paddingLeft: '0' }}>
+        <h2 style={{ marginBottom: '5px' }}>{data.data.hotelName}</h2>
+        <p>
+          {data.date}-- {data.days} {+data.days == 1 ? 'день' : 4 >= +data.days ? 'дня' : 'дней'}
+        </p>
         <Rating
           name="simple-controlled"
-          value={value}
+          value={+data.data.stars}
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
         />
       </div>
-      <div>
+      <div style={{ width: '22%' }}>
         <Checkbox
           icon={<FavoriteBorder />}
           checkedIcon={<Favorite />}
           checked={cheked}
           onClick={hundlerClick}
+          color={'error'}
         />
         <p>
-          <span>Price:</span> {data.priceFrom} ₽
+          <span>Price:</span> {data.data.priceFrom} ₽
         </p>
       </div>
     </div>

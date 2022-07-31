@@ -1,0 +1,36 @@
+.form{
+  height: auto;
+  background: white;
+  box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
+  border-radius: 16px;
+  margin-bottom: 24px;
+  padding: 32px;
+  
+  button{
+    width: 100% !important;
+  }
+}
+
+.celendar{
+  width: 100% !important;;
+}
+.input{
+  margin-bottom: 16px;
+  width: 100% !important;
+}
+.marg{
+  margin-bottom: 32px;
+  width: 100% !important;
+}
+
+.label{
+  label{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #424242;
+    margin-left: 0;
+  }
+}

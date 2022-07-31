@@ -38,30 +38,65 @@ const Registration:React.FC = () => {
       setValidPass(true)
       dispatch(setValid(true))
       dispatch(setAuth(data));
-      return navigate('/');
+      return navigate('/main');
     }
   };
   return (
     <div className={classes.container}>
-      <form action="" onSubmit={handleSubmit(Sub)}>
-        <h2>Simple Hotel Check</h2>
-        <MyInput
-          children={'Логин'}
-          value={login}
-          ref={{ ...register('login', { required: true }) }}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => hundlerLogin(e)}
-        />
-        {!validLogin && <h1>ytdthyj </h1>}
+      <div className={classes.fon}>
+        <form action="" onSubmit={handleSubmit(Sub)}>
+          <h2>Simple Hotel Check</h2>
+          <MyInput
+            children={'Логин'}
+            value={login}
+            placeholder={!validLogin ? 'login@mail.ru' : ''}
+            valid={validLogin}
+            ref={{ ...register('login', { required: true }) }}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => hundlerLogin(e)}
+          />
+          {!validLogin && (
+            <label
+              style={{
+                fontFamily: 'Roboto',
+                fontStyle: 'normal',
+                fontWeight: '300',
+                fontSize: '12px',
+                lineHeight: '14px',
+                color: '#EB1717',
+                alignSelf: 'flex-start',
+                marginLeft: '5%',
+              }}>
+              Неверный логин{' '}
+            </label>
+          )}
 
-        <MyInput
-          children={'Пароль'}
-          value={pass}
-          ref={{ ...register('password', { required: true }) }}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => hundlerPass(e)}
-        />
-        {!validPass && <h1>ytdthyj </h1>}
-        <MyButton />
-      </form>
+          <MyInput
+            children={'Пароль'}
+            value={pass}
+            placeholder={!validPass ? 'Aaaaaaa7' : ''}
+            className={classes.input}
+            valid={validPass}
+            ref={{ ...register('password', { required: true }) }}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => hundlerPass(e)}
+          />
+          {!validPass && (
+            <label
+              style={{
+                fontFamily: 'Roboto',
+                fontStyle: 'normal',
+                fontWeight: '300',
+                fontSize: '12px',
+                lineHeight: '14px',
+                color: '#EB1717',
+                alignSelf: 'flex-start',
+                marginLeft: '5%',
+              }}>
+              Не менее 8 символов с одной заглавной буквой и одной цифрой
+            </label>
+          )}
+          <MyButton >Войти</MyButton>
+        </form>
+      </div>
     </div>
   );
 }
