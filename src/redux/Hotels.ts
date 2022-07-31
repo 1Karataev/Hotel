@@ -1,5 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
 export interface Hotel {
@@ -42,8 +41,7 @@ reducers:{
     
   },
   setOutValue(state){
-    // const dat = new Date(state.date)
-    // dat.setDate(dat.getDate() + +state.days)
+   
     state.out = `${new Date(new Date(state.date).setDate(new Date(state.date).getDate() + +state.days)).toLocaleDateString().split('.').reverse().join('-')}`
     
   },

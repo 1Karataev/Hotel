@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect,  useState } from 'react'
 import classes from './Main.module.scss'
 import Cart from '../components/Cart';
-import {  setDateValue, setDaysValue, setHotels, setOutValue } from '../redux/Hotels';
+import {  setOutValue } from '../redux/Hotels';
 import { RootState, useAppDispatch } from '../redux/store';
 import { useSelector } from 'react-redux';
 import Search from '../components/search/Search';
-import { setDelite } from '../redux/Likes';
+
 import Favorit from '../components/Favorit';
-import Servis from '../API/Servis';
+
 import { useNavigate } from 'react-router-dom';
 import { setAuth } from '../redux/Auth';
 import { motion } from 'framer-motion';
@@ -26,7 +26,7 @@ const  Main:React.FC =  () => {
   const navigate = useNavigate();
   const logOut =()=>{
     dispatch(setAuth({ login: '', password: '' }));
-    return navigate('/')
+    return navigate('/Hotel')
   } 
  useEffect(() => {
    dispatch(setOutValue());
