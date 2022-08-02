@@ -5,9 +5,7 @@ import {  setOutValue } from '../redux/Hotels';
 import { RootState, useAppDispatch } from '../redux/store';
 import { useSelector } from 'react-redux';
 import Search from '../components/search/Search';
-
 import Favorit from '../components/Favorit';
-
 import { useNavigate } from 'react-router-dom';
 import { setAuth } from '../redux/Auth';
 import { motion } from 'framer-motion';
