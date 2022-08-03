@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import Search from '../components/search/Search';
 import Favorit from '../components/Favorit';
 import { useNavigate } from 'react-router-dom';
-import { setAuth } from '../redux/Auth';
+import { setAuth, setValid } from '../redux/Auth';
 import { motion } from 'framer-motion';
 
 
@@ -24,7 +24,9 @@ const  Main:React.FC =  () => {
   const navigate = useNavigate();
   const logOut =()=>{
     dispatch(setAuth({ login: '', password: '' }));
-    return navigate('/')
+    dispatch(setValid(false))
+
+    // return navigate('/') пояснение подробное в registration
   } 
  useEffect(() => {
    dispatch(setOutValue());

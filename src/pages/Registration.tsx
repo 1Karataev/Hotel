@@ -38,7 +38,8 @@ const Registration:React.FC = () => {
       setValidPass(true)
       dispatch(setValid(true))
       dispatch(setAuth(data));
-      return navigate('/main');
+
+      // return navigate('/main') можно еще так решить, но при деплое ведет себя не очень такая реализация;
     }
   };
   return (

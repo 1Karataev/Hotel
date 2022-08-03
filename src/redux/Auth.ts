@@ -14,7 +14,7 @@ interface Auth {
 }
 const initialState: Auth = {
  auth:{ login:'', password:''},
- valid: false
+ valid: JSON.parse(localStorage.getItem('valid')??'false')
 };
 
 
@@ -24,10 +24,11 @@ const AuthSlice = createSlice({
   reducers: {
     setAuth(state, action: PayloadAction<Login>) {
       state.auth = action.payload
-      console.log(state.auth)
+      
     },
      setValid(state, action: PayloadAction<boolean>) {
       state.valid = action.payload
+      localStorage.setItem('valid', JSON.stringify(action.payload))
     },
    
   },
