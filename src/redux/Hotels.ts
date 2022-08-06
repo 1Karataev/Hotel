@@ -15,6 +15,7 @@ interface FilterHotel {
   date:string,
   days:string,
   out:string,
+  loading:boolean,
   photos:string[]
   hotel:Hotel[]
 }
@@ -23,6 +24,7 @@ const initialState:FilterHotel = {
   date:  `${new Date().toLocaleDateString().split('.').reverse().join('-')}`,
   days: '1',
   out:  `${new Date(new Date().setDate(new Date().getDate() + 1)).toLocaleDateString().split('.').reverse().join('-')}`,
+  loading:false,
   photos:[],
   hotel: [],
  
@@ -56,12 +58,16 @@ reducers:{
   setPhotos(state, action:PayloadAction<string[]>){
     state.photos = action.payload
     
+  },
+  setLoading(state, action:PayloadAction<boolean>){
+    state.loading = action.payload
+    
   }
 },
 
 
 })
-export const { setDaysValue, setLocalValue, setDateValue, setOutValue, setHotels, setPhotos} = hotelSlice.actions;
+export const { setDaysValue, setLocalValue, setDateValue, setOutValue, setHotels, setPhotos, setLoading} = hotelSlice.actions;
 export default hotelSlice.reducer
 
 

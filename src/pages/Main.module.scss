@@ -23,7 +23,7 @@
 .side{
   display: flex;
   flex-direction: column;
-  width: 33%;
+  width: 30%;
   height: 100%;
 }
 
@@ -38,7 +38,7 @@
   flex-direction: column;
   align-items:flex-start;
   & button{
-    padding: 4px 30px 4px 8px;
+    padding: 4px 26px 4px 8px;
     background: #FFFFFF;
     border: 1px solid #41522E;
     border-radius: 4px;
@@ -61,8 +61,7 @@
       line-height: 20px;
       color: #41522E;
     }
-    .spangrey{
-      background:url('./../img/grey.svg') !important;
+    .spangrey{ 
       position: sticky;
       display:inline-block;
       left: 75%;
@@ -71,6 +70,7 @@
       bottom: 53.87%;
       width:9px; 
       height:5.3px;
+      background:url('./../img/grey.svg');
       transform: rotate(180deg);
     }
     .spangreen{
@@ -93,7 +93,7 @@
  display: flex;
  flex-direction: column;
  align-items: center;
- width: 75%;
+ width: 68%;
  height: 902px;
  background: white;
  box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
@@ -149,8 +149,8 @@
       bottom: 0 !important;
       
     }
-    .rotategray {
-      transform: rotate(360deg)!important;
+.rotategray {
+      transform: rotate(0deg)!important;
       bottom: 0 !important;
       
     }

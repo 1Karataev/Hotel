@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { Hotel } from '../redux/Hotels';
 
-export default class Servis {
-  static async fetch(dispatch: any, setHotels: any, setPhotos:any, local: string, datein: string, dateout: string) {
+export default class Service {
+  static async fetch(dispatch: any, setHotels: any, setPhotos:any, setLoading:any, local: string, datein: string, dateout: string) {
     const response = await axios.get(
       `http://engine.hotellook.com/api/v2/cache.json?location=${local}&currency=rub&checkIn=${datein}&checkOut=${dateout}&limit=10`,
     );
@@ -15,5 +15,8 @@ export default class Servis {
          ),
        ),
      );
+      dispatch(
+        setLoading(false),
+      );
   }
 }

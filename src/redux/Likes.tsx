@@ -34,12 +34,12 @@ const likesSlice = createSlice({
       localStorage.setItem('hotels', JSON.stringify(state.hotel))
     },
     
-    setDelite(state, action: PayloadAction<number>) {
+    setDelete(state, action: PayloadAction<number>) {
        state.hotel = state.hotel.filter((a, i) => a.hotelId !== action.payload);
        localStorage.setItem('hotels', JSON.stringify(state.hotel));
     },
   },
 });
-export const { setItem, setDelite } = likesSlice.actions;
+export const { setItem, setDelete } = likesSlice.actions;
 
 export default likesSlice.reducer;

@@ -41,7 +41,7 @@ p{
 .content__cart{
    display: flex;
   flex-direction: row;
-  height: 33%;
+  height: auto;
   width: 100%;
   border-bottom: 1px solid rgba(135, 135, 135, 0.2);
   border-radius: 8px;
@@ -57,3 +57,4 @@ p{
     color: #424242;
   }
 }
+

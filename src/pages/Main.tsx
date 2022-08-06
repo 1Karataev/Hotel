@@ -9,6 +9,7 @@ import Favorit from '../components/Favorit';
 import { useNavigate } from 'react-router-dom';
 import { setAuth, setValid } from '../redux/Auth';
 import { motion } from 'framer-motion';
+import { CircularProgress } from '@mui/material';
 
 
 const  Main:React.FC =  () => {
@@ -22,6 +23,7 @@ const  Main:React.FC =  () => {
   const dispatch = useAppDispatch()
   const like = [...useSelector((store: RootState)=>store.like.hotel)]
   const navigate = useNavigate();
+  const loading = useSelector((store: RootState) => store?.hotels.loading);
   const logOut =()=>{
     dispatch(setAuth({ login: '', password: '' }));
     dispatch(setValid(false))
@@ -67,7 +69,7 @@ const  Main:React.FC =  () => {
             <h2>Избранное</h2>
             <div className={classes.like_filter}>
               <button onClick={() => setRate(!rate)}>
-                рейтинг{' '}
+                Рейтинг{' '}
                 <span
                   className={
                     rate ? classes.spangreen : [classes.spangreen, classes.rotate].join(' ')
@@ -80,7 +82,7 @@ const  Main:React.FC =  () => {
                 />
               </button>
               <button onClick={() => setPrice(!price)}>
-                цена{' '}
+                Цена{' '}
                 <span
                   className={
                     price ? classes.spangreen : [classes.spangreen, classes.rotate].join(' ')
@@ -131,16 +133,20 @@ const  Main:React.FC =  () => {
           </div>
 
           <motion.div className={classes.corusel}>
-            <motion.div
-              drag="x"
-              dragConstraints={{ right: 0, left: -940 }}
-              className={classes.corusel_inner}>
-              {photos.map((image, i) => (
-                <motion.div className={classes.photo} key={i}>
-                  <img src={image} alt="" key={i} />
-                </motion.div>
-              ))}
-            </motion.div>
+            {!loading ? (
+              <motion.div
+                drag="x"
+                dragConstraints={{ right: 0, left: -940 }}
+                className={classes.corusel_inner}>
+                {photos.map((image, i) => (
+                  <motion.div className={classes.photo} key={i}>
+                    <img src={image} alt="" key={i} />
+                  </motion.div>
+                ))}
+              </motion.div>
+            ) : (
+              <CircularProgress color="success" />
+            )}
           </motion.div>
 
           <p>
@@ -159,12 +165,12 @@ const  Main:React.FC =  () => {
               marginLeft: '5%',
               overflow: 'auto',
             }}>
-            {hotels ? (
+            {!loading ? (
               hotels.map((hotel) => (
                 <Cart key={hotel.hotelId} data={hotel} days={days} date={date} />
               ))
             ) : (
-              <h2>нет ничего </h2>
+              <CircularProgress color="success" style={{alignSelf:'center'}}/>
             )}
           </div>
         </div>

@@ -3,8 +3,9 @@ import { Avatar, Checkbox, Rating } from '@mui/material';
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Hotel } from '../redux/Hotels';
-import { setDelite, setItem } from '../redux/Likes';
+import { setDelete, setItem } from '../redux/Likes';
 import { RootState, useAppDispatch } from '../redux/store';
+import HomeIcon from '@mui/icons-material/Home';
 import classes from './Cart.module.scss';
 type Cart = {
   data: Hotel;
@@ -14,26 +15,24 @@ type Cart = {
 
 const Cart:React.FC<Cart> = (data) => {
   const [value, setValue] = React.useState<number | null>(2);
-  const [cheked, setCheked] = useState<boolean>(false)
   const date = useSelector((store:RootState)=>store.hotels.date)
   const days = useSelector((store: RootState) => store?.hotels.days);
-   const like = [...useSelector((store: RootState) => store.like.hotel)];
+  const like = useSelector((store: RootState) => store.like.hotel).some(
+    (item) => item.hotelId == data.data.hotelId,
+  );
   const dispatch = useAppDispatch()
-
+  
  const hundlerClick = () => {
-   setCheked(!cheked);
-   !cheked
+   !like
      ? dispatch(setItem({ ...data.data, date: date, days: days }))
-     : dispatch(setDelite(data.data.hotelId));
+     : dispatch(setDelete(data.data.hotelId));
   
  };
   return (
     <div className={classes.cart}>
       <Avatar
-        alt="Remy Sharp"
-        src="/static/images/avatar/1.jpg"
         style={{ width: '64px', height: '64px' }}
-      />
+      > <HomeIcon/> </Avatar>
       <div className={classes.content}>
         <h2>{data.data.hotelName}</h2>
         <p>
@@ -47,16 +46,17 @@ const Cart:React.FC<Cart> = (data) => {
           }}
         />
       </div>
-      <div style={{ width: '22%' }}>
+      <div style={{ width: '25%' }}>
         <Checkbox
           icon={<FavoriteBorder />}
           color={'error'}
           checkedIcon={<Favorite />}
-          checked={cheked}
+          checked={like}
           onClick={hundlerClick}
         />
         <p>
-          <span>Price:</span> {data.data.priceFrom} ₽
+          <span style={{ marginRight: '8px' }}>Price:</span>{' '}
+          <span style={{ fontWeight: '400' }}>{data.data.priceFrom} ₽</span>
         </p>
       </div>
     </div>

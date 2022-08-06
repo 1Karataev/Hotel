@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import MyInput from '../../modules/Input/MyInput';
 import MyButton from '../../modules/MyButton';
 import classes from './Search.module.scss';
-import {  setDaysValue, setHotels, setLocalValue, setOutValue, setPhotos } from '../../redux/Hotels';
+import {  setDaysValue, setHotels, setLocalValue, setOutValue, setPhotos, setLoading } from '../../redux/Hotels';
 import { RootState, useAppDispatch } from '../../redux/store';
 import Calendar from './Calendar';
-import Servis from '../../API/Servis';
+import Service from '../../API/Service';
 
 
 const Search:React.FC = () =>{
@@ -30,13 +30,15 @@ const Search:React.FC = () =>{
 
     const hundlerSearch = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      Servis.fetch(dispatch, setHotels, setPhotos, local, datein, dateout);
+      dispatch(setLoading(true))
+      Service.fetch(dispatch, setHotels, setPhotos, setLoading, local, datein, dateout);
      
       
     };
     useEffect(() => {
       dispatch(setOutValue());
-      Servis.fetch(dispatch, setHotels, setPhotos, local, datein, dateout);
+      dispatch(setLoading(true));
+      Service.fetch(dispatch, setHotels, setPhotos, setLoading, local, datein, dateout);
       
     }, []);
     
