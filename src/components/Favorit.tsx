@@ -1,7 +1,6 @@
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { Avatar, Checkbox, Rating } from '@mui/material';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Hotel } from '../redux/Hotels';
 import { setDelete, setItem } from '../redux/Likes';
 import { RootState, useAppDispatch } from '../redux/store';

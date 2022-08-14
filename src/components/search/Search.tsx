@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux';
 import MyInput from '../../modules/Input/MyInput';
 import MyButton from '../../modules/MyButton';
 import classes from './Search.module.scss';
-import {  setDaysValue, setHotels, setLocalValue, setOutValue, setPhotos, setLoading } from '../../redux/Hotels';
+import {  setDaysValue, setHotels, setLocalValue, setOutValue, setPhotos} from '../../redux/Hotels';
 import { RootState, useAppDispatch } from '../../redux/store';
 import Calendar from './Calendar';
 import Service from '../../API/Service';
+import {  useGetHotelsByNameQuery} from '../../API/ServisRTK';
 
 
 const Search:React.FC = () =>{
@@ -15,9 +16,7 @@ const Search:React.FC = () =>{
   const dateout = useSelector((state: RootState) => state.hotels.out);
   const days = useSelector((state: RootState) => state.hotels.days);
   const dispatch = useAppDispatch()
-  const photos = [...useSelector((state: RootState) => state.hotels.hotel)].map(
-    (a) => `https://photo.hotellook.com/image_v2/limit/h${a.hotelId}/800/520.auto`,
-  );
+  const { data} = useGetHotelsByNameQuery({ local, datein, dateout });
   const localHundler = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setLocalValue(e.target.value));
    
@@ -30,16 +29,15 @@ const Search:React.FC = () =>{
 
     const hundlerSearch = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      dispatch(setLoading(true))
-      Service.fetch(dispatch, setHotels, setPhotos, setLoading, local, datein, dateout);
-     
-      
+      if (data?.length) dispatch(setHotels(data));
+      Service.photos(dispatch, setPhotos, data);
     };
+    
     useEffect(() => {
       dispatch(setOutValue());
-      dispatch(setLoading(true));
-      Service.fetch(dispatch, setHotels, setPhotos, setLoading, local, datein, dateout);
       
+      Service.fetch(dispatch, setHotels, setPhotos, local, datein, dateout);
+     
     }, []);
     
   return (

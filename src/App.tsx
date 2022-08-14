@@ -9,7 +9,7 @@ import { RootState } from './redux/store';
 
 function App() {
   const valid = useSelector((store:RootState)=> store.auth.valid)
-
+  
 
   return (
     <div className="App">

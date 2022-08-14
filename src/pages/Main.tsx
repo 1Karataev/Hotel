@@ -1,7 +1,7 @@
-import React, { useEffect,  useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classes from './Main.module.scss'
 import Cart from '../components/Cart';
-import {  setOutValue } from '../redux/Hotels';
+import {  setHotels, setOutValue } from '../redux/Hotels';
 import { RootState, useAppDispatch } from '../redux/store';
 import { useSelector } from 'react-redux';
 import Search from '../components/search/Search';
@@ -10,20 +10,22 @@ import { useNavigate } from 'react-router-dom';
 import { setAuth, setValid } from '../redux/Auth';
 import { motion } from 'framer-motion';
 import { CircularProgress } from '@mui/material';
+import { useGetHotelsByNameQuery } from '../API/ServisRTK';
 
 
 const  Main:React.FC =  () => {
   const hotels = useSelector((store: RootState) => store?.hotels.hotel);
   const days = useSelector((store: RootState) => store?.hotels.days);
-  const date = useSelector((store: RootState) => store?.hotels.date);
+  const datein = useSelector((store: RootState) => store?.hotels.date);
+   const dateout = useSelector((state: RootState) => state.hotels.out);
   const local = useSelector((store: RootState) => store?.hotels.location);
-  const photos = useSelector((store: RootState) => store?.hotels.photos);
+  const photos = useSelector((store: RootState) => store?.hotels.photos)
   const [price, setPrice] = useState<boolean>(true)
   const [rate, setRate] = useState<boolean>(true);
   const dispatch = useAppDispatch()
   const like = [...useSelector((store: RootState)=>store.like.hotel)]
   const navigate = useNavigate();
-  const loading = useSelector((store: RootState) => store?.hotels.loading);
+  const { data, isLoading, error} = useGetHotelsByNameQuery({ local, datein, dateout });
   const logOut =()=>{
     dispatch(setAuth({ login: '', password: '' }));
     dispatch(setValid(false))
@@ -32,7 +34,10 @@ const  Main:React.FC =  () => {
   } 
  useEffect(() => {
    dispatch(setOutValue());
+   
  }, []);
+
+
   return (
     <div className={classes.main}>
       <header className={classes.header}>
@@ -129,18 +134,22 @@ const  Main:React.FC =  () => {
             <h2>
               Отели<span>{'>'}</span> {local}
             </h2>
-            <p>{date}</p>
+            <p>{datein}</p>
           </div>
 
           <motion.div className={classes.corusel}>
-            {!loading ? (
+            {!isLoading ? (
               <motion.div
                 drag="x"
-                dragConstraints={{ right: 0, left: -940 }}
+               
+                dragConstraints={{
+                  right: 0,
+                  left: - 2750
+                }}
                 className={classes.corusel_inner}>
-                {photos.map((image, i) => (
+                {photos.map((img, i) => (
                   <motion.div className={classes.photo} key={i}>
-                    <img src={image} alt="" key={i} />
+                    <img src={img} alt="" key={i} />
                   </motion.div>
                 ))}
               </motion.div>
@@ -165,12 +174,12 @@ const  Main:React.FC =  () => {
               marginLeft: '5%',
               overflow: 'auto',
             }}>
-            {!loading ? (
+            {!isLoading ? (
               hotels.map((hotel) => (
-                <Cart key={hotel.hotelId} data={hotel} days={days} date={date} />
+                <Cart key={hotel.hotelId} data={hotel} days={days} date={datein} />
               ))
             ) : (
-              <CircularProgress color="success" style={{alignSelf:'center'}}/>
+              <CircularProgress color="success" style={{ alignSelf: 'center' }} />
             )}
           </div>
         </div>
